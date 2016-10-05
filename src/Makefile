@@ -25,6 +25,7 @@
 #COMMON=-pg -g
 COMMON=-g
 PREFIX=/da/coding/Integrated-16S
+INSTALL=install
 
 COMPILEOPT=-Wall -Wsign-compare -O3 -msse2 -mtune=core2 -Icityhash
 
