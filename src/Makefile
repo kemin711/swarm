@@ -24,6 +24,7 @@
 # Profiling options
 #COMMON=-pg -g
 COMMON=-g
+PREFIX=/da/coding/Integrated-16S
 
 COMPILEOPT=-Wall -Wsign-compare -O3 -msse2 -mtune=core2 -Icityhash
 
@@ -41,10 +42,14 @@ OBJS=swarm.o db.o search8.o search16.o nw.o matrix.o util.o scan.o \
 DEPS=Makefile swarm.h bitmap.h bloom.h cityhash/config.h cityhash/city.h \
 	threads.h
 
-.SUFFIXES:.o .cc
+.PHONY : all clean
 
-%.o : %.cc $(DEPS)
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+# Implecit suffix rules are the same, 
+# So you don't need to specify the following
+#.SUFFIXES:.o .cc
+#%.o : %.cc $(DEPS)
+#	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 all : $(PROG)
 
@@ -58,3 +63,7 @@ clean :
 
 ssse3.o : ssse3.cc $(DEPS)
 	$(CXX) -mssse3 $(CXXFLAGS) -c -o $@ $<
+
+install :
+	$(INSTALL) $(PROG) $(PREFIX)/bin
+
